@@ -20,8 +20,8 @@ POST http://127.0.0.1:8000/account/student/
 Content-Type: application/json
 
 {
-    "username":"student1",
-    "email":"student1@gmail.come",
-    "password":"s1@123",
-    "phone":7848434245
+    "username":"student2",
+    "email":"student2@gmail.come",
+    "password":"s2@123",
+    "phone":7828434245
 }
