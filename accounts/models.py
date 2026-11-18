@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
 
 # Create your models here.
 
@@ -8,7 +9,6 @@ class User(AbstractUser):
 
     ROLE_CHOICES = (
 
-        ('ADMIN', 'Admin'),
         ('TRAINER', 'Trainer'),
         ('STUDENT', 'Student'),
 
@@ -25,19 +25,22 @@ class User(AbstractUser):
 
 class TrainerProfile(models.Model):
 
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='trainer_profile')
+    trainer = models.OneToOneField(User,on_delete=models.CASCADE,related_name="trainer")
 
-    qualification = models.CharField(max_length=200)
+    specialization = models.CharField(max_length=100,null=True)
 
-    experience = models.IntegerField()
+    skills = models.TextField(null=True)
 
-    specialization = models.CharField(max_length=200)
+    qualification = models.CharField(max_length=200,null=True)
 
-    bio = models.TextField(null=True)
+    experience = models.CharField(max_length=200,null=True)
 
-    profile_picture = models.ImageField(upload_to='trainer_profiles',null=True)
+    profile_picture = models.ImageField(upload_to="cover_pics",null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
 
@@ -46,25 +49,38 @@ class TrainerProfile(models.Model):
 
 class StudentProfile(models.Model):
 
-    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name='student_profile')
+    student = models.OneToOneField(User,on_delete=models.CASCADE,related_name="student")
 
-    qualification = models.CharField(max_length=200)
+    course = models.CharField(max_length=200,null=True)
 
-    start_year = models.IntegerField(null=True)
+    qualification = models.CharField(max_length=200,null=True)
 
-    passout_year = models.IntegerField(null=True)
+    passout_year = models.PositiveIntegerField(null=True)
+
+    profile_picture = models.ImageField(upload_to="cover_pics",null=True)
 
     skills = models.TextField(null=True)
 
-    linkedin_url = models.URLField(null=True)
-
-    github_url = models.URLField(null=True)
-
-    date_of_birth = models.DateField(null=True)
-
-    profile_picture = models.ImageField(upload_to='student_profiles',null=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.username
+
+def create_trainer_profile(sender,instance,created,*args,**kwargs):
+
+    if created and instance.role == "trainer":
+
+        TrainerProfile.objects.create(trainer=instance)
+
+post_save.connect(create_trainer_profile,User)
+
+def create_student_profile(sender,instance,created,*args,**kwargs):
+
+    if created and instance.role == "student":
+
+        StudentProfile.objects.create(student=instance)
+
+post_save.connect(create_student_profile,User)
+    

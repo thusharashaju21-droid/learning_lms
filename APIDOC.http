@@ -1,0 +1,27 @@
+
+
+# ============ REGISTRATION,AUTHENTICATION ================= #
+
+# api call for trainer registration
+###
+POST http://127.0.0.1:8000/account/trainer/
+Content-Type: application/json
+
+{
+    "username":"trainer2",
+    "email":"trainer2@gmail.come",
+    "password":"trainer2@123",
+    "phone":"78947294332"
+}
+
+# api call for student registration
+###
+POST http://127.0.0.1:8000/account/student/
+Content-Type: application/json
+
+{
+    "username":"student1",
+    "email":"student1@gmail.come",
+    "password":"s1@123",
+    "phone":7848434245
+}
