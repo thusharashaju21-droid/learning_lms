@@ -25,3 +25,33 @@ Content-Type: application/json
     "password":"s2@123",
     "phone":7828434245
 }
+
+# api call for token creation
+###
+POST http://127.0.0.1:8000/account/token/
+Content-Type: application/json
+
+{
+    "username":"trainer2",
+    "password":"trainer2@123"
+}
+
+# api call for trainer profile update
+###
+PUT http://127.0.0.1:8000/account/trainer/profile/complete/
+Content-Type: application/json
+Authorization: Token 365eee855a4d7a47cdc0e9fef1f42f23733d41cd
+
+{
+    "specialization": "Python Full Stack",
+    "skills": "Python, Django, DRF, MySQL, HTML, CSS, JavaScript",
+    "qualification": "MCA",
+    "experience": "4 years"
+}
+
+# api call for trainer profile retreiving
+###
+GET http://127.0.0.1:8000/account/trainer/profile/me/
+Accept: application/json
+Authorization: Token 696a8b0320b26aec11c3481372ba45c43f07dbcc
+
