@@ -91,9 +91,9 @@ def send_invtation_mail(sender,instance,created,*args,**kwargs):
 
         send_mail(
             "Account creation confirmation",
-            "You have successfully created your account in learnova",
+            "You have successfully created your account in develop_lms",
             "thusharashaju21@gmail.com",
-            ["soorajdas818@gmail.com"],
+            ["soorajd683@gmail.com"],
         )
 
 post_save.connect(send_invtation_mail,sender=User)

@@ -8,10 +8,10 @@ POST http://127.0.0.1:8000/account/trainer/
 Content-Type: application/json
 
 {
-    "username":"trainer2",
-    "email":"trainer2@gmail.come",
-    "password":"trainer2@123",
-    "phone":"78947294332"
+    "username":"trainer3",
+    "email":"trainer3@gmail.come",
+    "password":"trainer3@123",
+    "phone":"7034598799"
 }
 
 # api call for student registration
@@ -20,10 +20,10 @@ POST http://127.0.0.1:8000/account/student/
 Content-Type: application/json
 
 {
-    "username":"student2",
-    "email":"student2@gmail.come",
-    "password":"s2@123",
-    "phone":7828434245
+    "username":"sooraj",
+    "email":"soorajd683@gmail.com",
+    "password":"s@123",
+    "phone":7012219886
 }
 
 # api call for token creation
@@ -52,6 +52,61 @@ Authorization: Token 365eee855a4d7a47cdc0e9fef1f42f23733d41cd
 # api call for trainer profile retreiving
 ###
 GET http://127.0.0.1:8000/account/trainer/profile/me/
+Accept: application/json
+Authorization: Token 696a8b0320b26aec11c3481372ba45c43f07dbcc
+
+
+# ============ COURSE CRUD ================= #
+
+
+# api call for listing courses
+###
+GET http://127.0.0.1:8000/subject/course/all/
+Accept: application/json
+Authorization: Token 696a8b0320b26aec11c3481372ba45c43f07dbcc
+
+# api call for creating courses
+###
+POST http://127.0.0.1:8000/subject/course/add/
+Content-Type: application/json
+Authorization: Token 696a8b0320b26aec11c3481372ba45c43f07dbcc
+
+{
+    "title":"Python Django Full Stack",
+    "description":"AI integrated python full stack development course.",
+    "fees":45000,
+    "duration":"7 months",
+    "languages":"Python,Django,SQL,React.js,HTML5,CSS,Javascript"
+    
+}
+
+# api call for retrieving a course
+###
+GET http://127.0.0.1:8000/subject/course/one/1/
+Accept: application/json
+Authorization: Token 696a8b0320b26aec11c3481372ba45c43f07dbcc
+
+# api call for updating a course
+###
+PUT http://127.0.0.1:8000/subject/course/1/
+Content-Type: application/json
+Authorization: Token 365eee855a4d7a47cdc0e9fef1f42f23733d41cd
+
+{
+    "id": 2,
+    "trainer": "trainer1",
+    "title": "Data Analystics",
+    "description": "AI integrated data analysis course.",
+    "fees": 78000,
+    "duration": "6.5 months",
+    "languages": "Python,NumPy,Pandas,AI ML",
+    "created_at": "2026-11-20",
+    "updated_at": "2026-11-20"
+  }
+
+# api call for deleting a course
+###
+DELETE http://127.0.0.1:8000/subject/course/2/
 Accept: application/json
 Authorization: Token 696a8b0320b26aec11c3481372ba45c43f07dbcc
 
