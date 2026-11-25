@@ -25,4 +25,7 @@ urlpatterns = [
 
     #subject
     path("subject/",include("subject.urls")),
+
+    #units
+    path("units/",include("units.urls")),
 ]

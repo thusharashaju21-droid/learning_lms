@@ -1,14 +1,13 @@
 from django.shortcuts import render
+from rest_framework import status
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import authentication
+from rest_framework import authentication,permissions
 
 from accounts.models import User,TrainerProfile
 from accounts.serializers import UserSerializer,TrainerProfileSerializer
 from accounts.permissions import IsTrainerUser
-
-# Create your views here.
 
 class TrainerCreateView(APIView):
 
@@ -31,6 +30,30 @@ class TrainerCreateView(APIView):
         else:
 
             return Response(data=serializer_instance.errors)
+
+# class TrainerCreateView(APIView):
+
+#     def post(self, request):
+
+#         # print("INCOMING DATA:", request.data)
+
+#         serializer = UserSerializer(data=request.data)
+
+#         if serializer.is_valid():
+
+#             user = serializer.save(role="trainer")
+
+#             return Response(
+#                 UserSerializer(user).data,
+#                 status=status.HTTP_201_CREATED
+#             )
+
+#         print("VALIDATION ERRORS:", serializer.errors)
+
+#         return Response(
+#             serializer.errors,
+#             status=status.HTTP_400_BAD_REQUEST
+#         )
 
 class StudentCreateView(APIView):
 
@@ -89,6 +112,4 @@ class TrainerprofileGetView(APIView):
         serializer_instance = TrainerProfileSerializer(instance)
 
         return Response(data=serializer_instance.data)
-
-
-        
+    
